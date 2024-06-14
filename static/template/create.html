@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Create Product</title>
+    </head>
+    <body>
+        <h1>Create Product</h1>
+        <form action="/add" method="post">
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" required>
+            <br>
+            <label for="company">Company:</label>
+            <input type="text" id="company" name="company" required>
+            <br>
+            <label for="price">Price:</label>
+            <input type="number" min="0" id="price" name="price" required>
+            <br>
+            <button type="submit">Create</button>
+            <!--<a href="/products"><button type="submit">View All Divices</button></a> fix-->
+        </form>
+    </body>
+</html>
