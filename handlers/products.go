@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 var data *db.DB = db.NewDatabase()
@@ -43,16 +45,12 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 		company := r.FormValue("company")
 		price, _ := strconv.Atoi(r.FormValue("price"))
 
-		fmt.Println(model, company, price)
-
 		p := models.Product{Model: model, Company: company, Price: price}
 
 		err := data.CreateProduct(&p)
 		if err != nil {
 			log.Print(err.Error())
 		}
-		var a = 5
-		fmt.Println(a)
 		http.Redirect(w, r, "/products", http.StatusSeeOther)
 	}
 
@@ -67,5 +65,27 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 		log.Print(err.Error())
 	}
 
+	// http.Redirect(w, r, "/products", http.StatusSeeOther)
+}
+
+func DeleteProduct(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	idStr := vars["id"]
+	if idStr == "" {
+		http.Error(w, "Не передан ID продукта", http.StatusBadRequest)
+		return
+	}
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		http.Error(w, "Ошибка обработки ID для удаления"+err.Error(), http.StatusInternalServerError)
+	}
+	fmt.Println(id)
+
+	err = data.DeleteProduct(id)
+	if err != nil {
+		http.Error(w, "Ошибка удаления: "+err.Error(), http.StatusInternalServerError)
+	}
+
 	http.Redirect(w, r, "/products", http.StatusSeeOther)
+
 }
