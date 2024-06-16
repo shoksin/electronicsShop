@@ -32,7 +32,7 @@ func AllProducts(w http.ResponseWriter, r *http.Request) {
 		products = append(products, p)
 	}
 
-	tmpl, _ := template.ParseFiles("static/template/index.html")
+	tmpl, _ := template.ParseFiles("index.html")
 	err = tmpl.Execute(w, products)
 	if err != nil {
 		log.Print(err.Error())
@@ -54,7 +54,7 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/products", http.StatusSeeOther)
 	}
 
-	tmpl, err := template.ParseFiles("static/template/create.html")
+	tmpl, err := template.ParseFiles("create.html")
 	if err != nil {
 		http.Error(w, "Ошибка при загрузке шаблона: "+err.Error(), http.StatusInternalServerError)
 		return
