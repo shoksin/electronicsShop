@@ -64,8 +64,6 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Print(err.Error())
 	}
-
-	// http.Redirect(w, r, "/products", http.StatusSeeOther)
 }
 
 func DeleteProduct(w http.ResponseWriter, r *http.Request) {
@@ -79,7 +77,6 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Ошибка обработки ID для удаления"+err.Error(), http.StatusInternalServerError)
 	}
-	fmt.Println(id)
 
 	err = data.DeleteProduct(id)
 	if err != nil {
