@@ -18,6 +18,7 @@ func main() {
 	r.HandleFunc("/products", handlers.AllProducts)
 	r.HandleFunc("/add", handlers.AddProduct)
 	r.HandleFunc("/delete/{id}", handlers.DeleteProduct)
+	r.HandleFunc("/registration", handlers.Registration)
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
 	s := &http.Server{

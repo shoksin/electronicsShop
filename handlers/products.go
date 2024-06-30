@@ -14,6 +14,18 @@ import (
 
 var data *db.DB = db.NewDatabase()
 
+func Registration(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("static/template/registration.html")
+	if err != nil {
+		http.Error(w, "Ошибка при загрузке шаблона: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	err = tmpl.Execute(w, nil)
+	if err != nil {
+		log.Print(err.Error())
+	}
+}
+
 func AllProducts(w http.ResponseWriter, r *http.Request) {
 	rows, err := data.Query("select * from Products")
 	if err != nil {
@@ -32,7 +44,7 @@ func AllProducts(w http.ResponseWriter, r *http.Request) {
 		products = append(products, p)
 	}
 
-	tmpl, _ := template.ParseFiles("index.html")
+	tmpl, _ := template.ParseFiles("static/template/index.html")
 	err = tmpl.Execute(w, products)
 	if err != nil {
 		log.Print(err.Error())
@@ -54,7 +66,7 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/products", http.StatusSeeOther)
 	}
 
-	tmpl, err := template.ParseFiles("create.html")
+	tmpl, err := template.ParseFiles("static/template/create.html")
 	if err != nil {
 		http.Error(w, "Ошибка при загрузке шаблона: "+err.Error(), http.StatusInternalServerError)
 		return

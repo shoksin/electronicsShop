@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+</head>
+<body>
+    <ul>
+        <li><a onclick="show('block')" href="#">Регистрация</a></li>
+       </ul>
+        <div onclick="show('none')" id="gray"></div>
+       <div id="window">
+        <div class="form">
+         <form action="/registration" name="f1">
+         <input type="text" placeholder="Логин" name="Username" class="input">
+         <input type="email" placeholder="Email" name="Email" class="input">
+         <input type="password" placeholder="Пароль" name="Password" class="input">
+         <input type="password" placeholder="Подтвердите пароль" name="Password" class="input">
+         <input type="submit" value="Регистрация" name="sab" class="input"> Нажимая «Регистрация», вы подтверждаете, что прочитали и согласны с нашими Условиями Пользования и Политикой Конфиденциальности.
+        </form>
+       </div>
+</body>
+</html>
